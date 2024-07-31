@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Helow</h1>
+    <?= include 'views/users/login.php'?>
 </body>
 </html>
