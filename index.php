@@ -1,3 +1,8 @@
+<?php
+    require_once 'controllers\UserController.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +11,16 @@
     <title>Document</title>
 </head>
 <body>
-    <?= include 'views/users/login.php'?>
+    <?php include 'views/users/register.php'?>
+
+    <?php
+        $action = isset($_GET['action'])  ?? "" ;
+        if(isset($_GET['action'])){}
+        switch($action){
+            case 'register': 
+                $userController = new UserController();
+                $userController->userRegistration();
+        }
+    ?>
 </body>
 </html>
