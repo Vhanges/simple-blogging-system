@@ -1,8 +1,17 @@
 <?php
 
-require 'models/User.php';
+require '../app/models/User.php';
+require '../app/core/Controller.php';
 
-class UserController extends User{
+class UserController extends Controller {
+    
+    protected $usernameRegistration = "";
+    protected $passwordRegistration = "";
+    protected $usertypeRegistration = "";
+
+    public function index(){
+        
+    }
 
     public function userRegistration(){
         if(isset($_POST['submit']) && $_SERVER['REQUEST_METHOD'] == "POST"){
@@ -10,9 +19,13 @@ class UserController extends User{
             $registerPassword = self::sanitizeData($_POST['password']);
             $registerUsertype = self::sanitizeData($_POST['usertype']);
 
-
-            $this->setRegisterUser($registerUsername, $registerPassword, $registerUsertype);
+            $model = new User();
+            $model->setRegisterUser($registerUsername, $registerPassword, $registerUsertype);
         }
+    }
+
+    public function sucessRegistion(){
+
     }
     
 
@@ -26,3 +39,6 @@ class UserController extends User{
         return $data;
     }
 }
+
+
+
