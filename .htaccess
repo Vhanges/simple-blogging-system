@@ -1,12 +1,20 @@
+# Sets the default file to serve when a directory is requested
+DirectoryIndex public/index.php
 
-DirectoryIndex index.php
-
+# Disables the MultiViews option to prevent unexpected behavior
 Options -MultiViews
+
+# Enables the Apache mod_rewrite module for URL rewriting
 RewriteEngine On
 
+# Sets the base URL for the rewrite rules
 RewriteBase /public/
 
+# Checks if the requested filename is not a directory
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# Checks if the requested filename is not a file
 RewriteCond %{REQUEST_FILENAME} !-f
 
+# Rewrites all requests that do not match an existing file or directory to index.php
 RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

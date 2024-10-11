@@ -2,11 +2,12 @@
 
 class Router
 {
-    public static function handle($method = 'GET', $path ='/', $controller = '')
+    public static function handle($method = 'GET', $path ='/', $controller = '', $action = null)
     {
         $currentMethod = $_SERVER['REQUEST_METHOD'];
         $currentUri = $_SERVER['REQUEST_URI'];
 
+        
         if($currentMethod != $method)
         {
             return false;
@@ -16,6 +17,9 @@ class Router
 
         $pattern = '#^'. $root. $path .'$#siD';
         
+
+        //Comment the code below when done debugging
+
         echo $currentUri. "<br>";
 
 
@@ -30,36 +34,39 @@ class Router
             }
             else
             {
-                 require_once "../controller/$controller.php";
+
+                 require_once "../app/controllers/$controller.php";
+                 $controller = new $controller();
+                 $controller->$action();
             }
             exit();
         }
-      
+        
         return false;
     }
 
-    public static function get($path = '/', $controller = '')
+    public static function get($path = '/', $controller = '', $action = null)
     {
-        return self::handle('GET', $path, $controller);
+        return self::handle('GET', $path, $controller, $action);
     }
 
-    public static function post($path = '/', $controller = '')
+    public static function post($path = '/', $controller = '', $action = null)
     {
-        return self::handle('POST', $path, $controller);
+        return self::handle('POST', $path, $controller, $action);
     }
     
-    public static function put($path = '/', $controller = '')
+    public static function put($path = '/', $controller = '', $action = null)
     {
-        return self::handle('PUT', $path, $controller);
+        return self::handle('PUT', $path, $controller, $action);
     }
 
-    public static function patch($path = '/', $controller = '')
+    public static function patch($path = '/', $controller = '', $action = null)
     {
-        return self::handle('PATCH', $path, $controller);
+        return self::handle('PATCH', $path, $controller, $action);
     }
 
-    public static function delete($path = '/', $controller = '')
+    public static function delete($path = '/', $controller = '', $action = null)
     {
-        return self::handle('DELETE', $path, $controller);
+        return self::handle('DELETE', $path, $controller, $action);
     }
 }

@@ -3,15 +3,10 @@ require_once 'Router.php';
 
 
 
-    Router::get('/test', function(){
-        echo "Hello Wao";
-    });
+    Router::get('/users/test', 'TestController', 'show');
 
     
     
-    Router::get('/test/wao', function(){
-        echo "Hello sdWao";
-    });
 
 
     //**First Method
